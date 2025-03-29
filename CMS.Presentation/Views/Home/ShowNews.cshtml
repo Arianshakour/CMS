@@ -1,0 +1,69 @@
+﻿@using CMS.Domain.Common
+@using CMS.Domain.ViewModels
+@model PageViewModel
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a role="button" onclick="HomeBtn()">خانه </a></li>
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Archive">اخبار </a></li>
+    @* <li class="breadcrumb-item"><a href="/Group/@Model.page.PageGroupId/@Model.page.pagegroup.GroupTitle">@Model.page.pagegroup.GroupTitle </a></li> *@
+    <li class="breadcrumb-item"><a role="button" onclick="ShowNewsByGroup(@Model.page.PageGroupId,'@(Uri.EscapeDataString(Model.page.pagegroup.GroupTitle))')">@Model.page.pagegroup.GroupTitle </a></li>
+    @* <li class="breadcrumb-item"><a asp-controller="Home" asp-action="ShowNewsById" asp-route-id="@Model.page.PageGroupId" asp-route-title="@Model.page.pagegroup.GroupTitle">@Model.page.pagegroup.GroupTitle </a></li> *@
+    <li class="breadcrumb-item active">@Model.page.Title </li>
+</ul>
+
+<section class="single-news border-radius">
+    <header><h2> @Model.page.Title </h2> <span> <i class="fa fa-calendar"></i>  انتشار : @Model.page.CreateDate.ToShamsi()</span></header>
+    <article>
+        <img class="border-radius" src="~/PageImages/@Model.page.ImageName" style="max-width:100px">
+        <p>
+            @Model.page.ShortDescription
+        </p>
+        <p>
+            @Model.page.Text
+        </p>
+    </article>
+</section>
+
+<div class="keywords border-radius">
+    @foreach (var item in @Model.page.Tags.Split("-"))
+    {
+        <a href="/Home/Index/?search=@item"> @item </a>
+    }
+</div>
+
+
+<div id="sectionComment">
+    @* <partial name="~/Views/Home/_sectionCommentForNews.cshtml" model="@Model.page" /> *@
+    <partial name="~/Views/Home/_sectionCommentForNews.cshtml" />
+</div>
+
+<script>
+    function addComment(){
+    let name = $("#txtname").val().trim();
+    let isValid = true;
+    $(".error-message").remove();
+    if (name === "") {
+        isValid = false;
+        $("<span class='error-message' style='color: red;'>این فیلد اجباری است</span>").insertAfter("#txtname");
+    }
+        if (isValid) {
+        $.ajax({
+            url: "/Home/AddComment?pageId=" + @Model.page.PageId,
+            type: "Post",
+            data: {
+                name: name,
+                email: $("#txtemail").val(),
+                comment: $("#txtcomment").val()
+            },
+        }).done(function (result) {
+            $("#txtname").val("");
+            $("#txtemail").val("");
+            $("#txtcomment").val("");
+            $("#sectionComment").empty();
+            $("#sectionComment").html(result);
+            alert('نظر شما پس از تایید در سایت قرار میگیرد');
+        });
+    }
+    }
+</script>

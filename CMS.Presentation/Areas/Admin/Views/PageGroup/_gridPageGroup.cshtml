@@ -1,0 +1,39 @@
+﻿@using CMS.Domain.ViewModels
+@model PageGroupViewModel
+
+@if (Model.pageGroupList != null && Model.pageGroupList.Any())
+{
+    <div class="table-responsive">
+        <table class=" table" style="font-family : yekan">
+            <thead style="background-color:#12cf77">
+                <tr>
+                    <th>آیدی</th>
+                    <th>نام دسته بندی</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.pageGroupList)
+                    {
+                        <tr>
+                            <td>@item.GroupId</td>
+                            <td>@item.GroupTitle</td>
+                            <td>
+                                <a role="button" class="btn-icon fa-lg" onclick="openDetailsPageGroup(@item.GroupId)" title="مشاهده جزئیات"><i class='fas fa-info-circle fa-lg'></i></a>
+                                <a role="button" class="btn-icon fa-lg" onclick="openEditPageGroup(@item.GroupId)" title="ویرایش"><i class='fas fa-edit'></i></a>
+                                <a role="button" class="btn-icon fa-lg" onclick="openDeletePageGroup(@item.GroupId)" title="حذف"><i class='fas fa-trash'></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info w-100 text-center" style="text-align:center;font-family : yekan" id="lll">
+        موردی یافت نشد
+    </div>
+}

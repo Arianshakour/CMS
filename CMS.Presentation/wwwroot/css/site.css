@@ -1,0 +1,35 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+/*baraye Font ezafe kardan hamchenin dar qesmat body ham ezafe kon*/
+@font-face {
+    font-family: 'Yekan';
+    src: url('/Font/Yekan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    font-family: 'Yekan', sans-serif;
+    margin-bottom: 60px;
+}
+.btn-close-right {
+    position: absolute; /* استفاده از موقعیت نسبی */
+    left: 5px; /* قرار دادن در سمت چپ */
+    margin: 1rem; /* کمی فاصله از لبه */
+}

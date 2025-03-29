@@ -1,0 +1,15 @@
+﻿@using CMS.Domain.ViewModels
+@model PageGroupViewModel
+
+@section Script{
+    <script src="/js/Admin/PageGroup.js"></script>
+}
+
+<p>
+    <a type="button" class="btn btn-success" onclick="openCreatePageGroup()">افزودن گروه جدید</a>
+</p>
+
+<div id="gridPageGroup">
+    <partial name="~/Areas/Admin/Views/PageGroup/_gridPageGroup.cshtml" />
+</div>
+

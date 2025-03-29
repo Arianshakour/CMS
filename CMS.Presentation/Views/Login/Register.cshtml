@@ -1,0 +1,40 @@
+﻿@using CMS.Domain.Dtoes.Member
+@model RegisterDto
+
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+
+<div class="register-container" id="registercontainer">
+    <header><h3> ثبت نام در سایت </h3></header>
+    <br />
+    <div>
+        <form method="post" id="registerForm">
+            <div class="form-group">
+                <input asp-for="UserName" class="form-control" placeholder="نام کاربری" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="ایمیل" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" placeholder="رمز عبور" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="RePassword" class="form-control" placeholder="تکرار رمز عبور" />
+                <span asp-validation-for="RePassword" class="text-danger"></span>
+            </div>
+            <div>
+                @* <button type="button" onclick="registerUserPost()" class="btn-register"> ثبت نام </button> *@
+                <button type="submit" asp-action="Register" asp-controller="Login" class="btn btn-success"> ثبت نام </button>
+            </div>
+        </form>
+        <div class="footer">
+            @* <p>حساب کاربری دارید؟ <a type="button" onclick="loadLoginPage()">وارد شوید</a></p> *@
+            <p>حساب کاربری دارید؟ <a type="button" class="btn btn-primary" asp-action="Login" asp-controller="Login">وارد شوید</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@using CMS.Domain.Common
+@using CMS.Domain.ViewModels
+@model PageViewModel
+
+
+<section class="comment-layer">
+    <header> <i class="fa fa-comments"></i><h5> دیدگاه کاربران </h5><span> @Model.page.PageComments.Count دیدگاه </span> </header>
+    <ul>
+        <!-- start each comment -->
+        @* @await Component.InvokeAsync("ShowComments", new { id = Model.page.PageId }) *@
+        @* dg niazi be viewcomponent nashod chon include kardam ke pagecomment ham bashe *@
+        @if (Model.page.PageComments.Any())
+        {
+            <li>
+                @foreach (var item in Model.page.PageComments)
+                {
+                    <img src="/SiteQaleb/img/thumb.png">
+                    <div>
+                        <span> @item.Name </span>
+                        <span> @item.CreateDate.ToShamsi() </span>
+                    </div>
+                    <p>@item.Comment</p>
+                }
+            </li>
+        }
+        else
+        {
+            <p>هنوز هیچ نظری ثبت نشده</p>
+        }
+        <!-- end each comment -->
+    </ul>
+
+    <h6> شما هم دیدگاه خود را ارسال کنید </h6>
+    <form class="comment-form" method="post" id="addComment">
+        <div>
+            <input placeholder=" نام و نام خانوادگی" type="text" id="txtname">
+            <input placeholder=" ایمیل خود را وارد نمایید " type="email" id="txtemail">
+        </div>
+        <textarea placeholder=" متن دیدگاه" id="txtcomment"> </textarea>
+        <input value="ثبت دیدگاه ارزشمند شما " type="button" onclick="addComment()">
+    </form>
+</section>

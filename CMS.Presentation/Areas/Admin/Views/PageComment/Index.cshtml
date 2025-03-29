@@ -1,0 +1,68 @@
+﻿@using CMS.Domain.ViewModels
+@model PageCommentViewModel
+
+@{
+    ViewData["Title"] = "لیست نظرات";
+}
+
+@section script {
+    <script src="~/js/site.js"></script>
+}
+
+<form asp-action="Index" asp-controller="PageComment" method="get" class="d-flex align-items-center mb-4">
+    <label class="control-label ms-3" style="white-space: nowrap;">انتخاب خبر</label>
+    <select name="pageid" class="form-control select2" asp-items="ViewBag.TitleName">
+        <option value="">انتخاب گروه</option>
+    </select>
+    <button type="submit" class="btn btn-info me-3"> انتخاب</button>
+</form>
+
+@if (Model.pageCommentList != null && Model.pageCommentList.Any())
+{
+    <div class="table-responsive">
+        <table class=" table">
+            <thead style="background-color:#12cf77">
+                <tr>
+                    <th>نام</th>
+                    <th>ایمیل</th>
+                    <th>وضعیت نمایش</th>
+                    <th>نظر</th>
+                    <th>عنوان خبر</th>
+                    <th>نام دسته بندی</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.pageCommentList)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            @*<td>@item.IsShow</td>*@
+                            <td>@(item.IsShow ? "بله" : "خیر")</td>
+                            <td>@item.Comment</td>
+                            <td>@item.page.Title</td>
+                            <td>@item.page.pagegroup.GroupTitle</td>
+                            <td>
+                                <a type="button" class="btn btn-success" asp-action="Details" asp-route-id="@item.CommentId">مشاهده جزئیات</a>
+                                <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@item.CommentId">ویرایش</a>
+                                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CommentId">حذف</a>
+                                @*<a class="btn-icon fa-lg" onclick="openDetailsUser(@item.PageId)" title="مشاهده جزئیات"><i class='fas fa-info-circle fa-lg'></i></a>
+                                <a class="btn-icon fa-lg" onclick="openEditUser(@item.PageId)" title="ویرایش"><i class='fas fa-edit'></i></a>
+                                <a class="btn-icon fa-lg" onclick="openDeleteUser(@item.PageId)" title="حذف"><i class='fas fa-trash'></i></a>*@
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info w-100 text-center" style="text-align:center" id="lll">
+        موردی یافت نشد
+    </div>
+}
+

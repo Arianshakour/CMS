@@ -1,0 +1,28 @@
+﻿@using CMS.Domain.ViewModels
+@model PageViewModel
+
+
+<!-- slider -->
+<div class="news-slider border-radius">
+    <div id="slider-one" class="owl-carousel">
+        <!-- each item -->
+        @foreach(var item in Model.pageList)
+        {
+            <div class="item">
+                <img src="/PageImages/@item.ImageName" style="max-width:200px">
+                <div class="left-side">
+                    @* <h2> <a asp-controller="Home" asp-action="ShowNews" asp-route-id="@item.PageId">@item.Title</a> </h2> *@
+                    <h2> <a role="button" onclick="ShowNews(@item.PageId)"> @item.Title </a></h2>
+                    <p>
+                        @item.ShortDescription
+                    </p>
+                    <span> <i class="fa fa-calendar"></i> انتشار : @item.CreateDate</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        }
+        <!-- end each item -->
+    </div>
+    <a role="button" onclick="ArchiveBtn()" class="news-archive"> <i class="icons icon-doc-1"></i> آرشیو کامل خبرها </a>
+</div>
+<!-- End slider -->

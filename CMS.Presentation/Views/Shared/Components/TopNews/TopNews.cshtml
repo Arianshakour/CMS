@@ -1,0 +1,16 @@
+﻿@using CMS.Domain.Common
+@using CMS.Domain.ViewModels
+@model PageViewModel
+
+@foreach(var item in Model.pageList)
+{
+    <li>
+        <img class="border-radius" src="/PageImages/@item.ImageName">
+        @* <h2> <a asp-controller="Home" asp-action="ShowNews" asp-route-id="@item.PageId">@item.Title</a></h2> *@
+        <h2> <a role="button" onclick="ShowNews(@item.PageId)">@item.Title</a></h2>
+        <span>انتشار : @item.CreateDate.ToShamsi()</span>
+        @* <h5> <a href="/Group/@item.pagegroup.GroupId/@item.pagegroup.GroupTitle">دسته بندی : @item.pagegroup.GroupTitle  </a></h5> *@
+        @* <h5> <a asp-controller="Home" asp-action="ShowNewsById" asp-route-id="@item.pagegroup.GroupId" asp-route-title="@item.pagegroup.GroupTitle">دسته بندی : @item.pagegroup.GroupTitle  </a></h5> *@
+        <h5> <a role="button" onclick="ShowNewsByGroup(@item.pagegroup.GroupId,'@(Uri.EscapeDataString(item.pagegroup.GroupTitle))')">دسته بندی : @item.pagegroup.GroupTitle  </a></h5>
+    </li>
+}

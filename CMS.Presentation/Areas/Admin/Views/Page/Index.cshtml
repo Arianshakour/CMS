@@ -1,0 +1,25 @@
+﻿@using CMS.Domain.ViewModels
+@model PageViewModel
+
+@section Script{
+    <script src="/js/Admin/Page.js"></script>
+}
+
+<p>
+    <a type="button" class="btn btn-success" onclick="openCreatePage()">افزودن خبر جدید</a>
+</p>
+
+
+@* <form asp-action="Index" asp-controller="Page" method="get" class="d-flex align-items-center mb-4"> *@
+<form method="get" class="d-flex align-items-center mb-4" id="selectGroupPageForm">
+    <label class="control-label" style="white-space: nowrap;">انتخاب گروه</label>
+    <select name="gId" class="form-control me-3" asp-items="ViewBag.GroupName">
+        <option value="">انتخاب گروه</option>
+    </select>
+    @* <button type="submit" class="btn btn-info me-3"> انتخاب</button> *@
+    <button type="button" onclick="selectGroupPage()" class="btn btn-info me-3"> انتخاب</button>
+</form>
+
+<div id="gridPage">
+    <partial name="~/Areas/Admin/Views/Page/_gridPage.cshtml" />
+</div>

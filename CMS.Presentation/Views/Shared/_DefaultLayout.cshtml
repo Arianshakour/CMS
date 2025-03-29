@@ -1,0 +1,181 @@
+﻿@using CMS.Domain.Common
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title> سایت خبری شخصی </title>
+    <base href="">
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="mobile-web-app-capable" content="yes"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/SiteQaleb/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/SiteQaleb/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/SiteQaleb/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/SiteQaleb/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/SiteQaleb/css/style.css">
+    <script src="/SiteQaleb/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/SiteQaleb/js/modernizr.js"></script>
+
+    <!-- Top Menu -->
+    <div class="top-menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-5">
+                    <ul>
+                        <li><a href=""><i class="fa fa-home"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-7">
+                    <span>امروز : @DateTime.Now.ToShamsi()</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Menu -->
+    <!-- header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <a href="/" class="logo"><img src="/SiteQaleb/img/logo4.png" alt="" title="" style="max-width:50px"></a>
+                    <div class="left-side">
+                        <h1><a href="/">سایت خبری</a></h1>
+                        <h2> پایگاه اطلاع رسانی و خبری</h2>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <form method="get" class="border-radius" style="position: relative; display: inline-block;">
+                        @* baraye peida kardan search hatman bayad name bdi ke ba vorodi controller ham esmesh yki bashe *@
+                        <input class="border-radius" type="text" name="search" id="search" placeholder=" جستجو کنید ... ">
+                        <a onclick="SearchBtn()" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); cursor: pointer;"><i class="fa fa-search"></i></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- menu -->
+    <nav class="main-menu">
+        <div class="container">
+            <span><i class="fa fa-th-list"></i></span>
+            <ul>
+                <li><a onclick="HomeBtn()"> صفحه اصلی </a></li>
+                <li><a onclick="ArchiveBtn()"> آرشیو اخبار </a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><span> @User.Identity.Name خوش آمدید </span>
+                    <ul>
+                        <li><a href="/Admin">پنل ادمین</a></li>
+                        <li><a asp-controller="Login" asp-action="ChangePassword">تغییر کلمه عبور</a></li>
+                    </ul>
+                    <li><a type="button" onclick="logoutform()"> خروج </a></li></li>
+                }
+                else
+                {
+                    @* <li><a asp-controller="Login" asp-action="Register"> ثبت نام </a></li> *@
+                    <li><a onclick="RegisterBtn()"> ثبت نام </a></li>
+                    <li><a onclick="LoginBtn()"> ورود به سایت </a></li>
+                }
+                <li>
+                    <span>گروه های خبری</span>
+                    <ul>
+                        @await Component.InvokeAsync("ShowGroupsInMenu")
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End menu -->
+
+    <div class="container margin-top-30">
+        <div class="row">
+
+            <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
+
+                @await Component.InvokeAsync("ShowGroups")
+
+                <!-- most views news -->
+                <section class="last-news-side border-radius">
+                    <header><i class="icons icon-star"></i> <h3> پربازدیدترین اخبار </h3></header>
+                    <ul>
+                        @await Component.InvokeAsync("TopNews")
+                    </ul>
+                </section>
+                <!-- end most views news -->
+            </aside>
+
+            
+            <div class="col-md-8 col-sm-12 col-xs-12 " id="safe">
+                @RenderBody()
+            </div>
+
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <section class="access-links">
+                        <header> دسترسی سریع </header>
+                        <ul>
+                            <li><a href=""> صفحه اصلی </a></li>
+                            <li><a href=""> قوانین سایت  </a></li>
+                            <li><a href=""> راهنمای سایت  </a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="socials">
+                        <span> شبکه های اجتماعی  سایت</span>
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                        <a href=""><i class="fa fa-whatsapp"></i></a>   
+                        <a href=""><i class="fa fa-paper-plane"></i></a>
+                        <a href=""><i class="fa fa-instagram"></i></a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p>
+                        تمامی حقوق مادی و معنوی این طرح متعلق به اینجانب می باشد و کپی برداری از این طرح غیر اخلاقی می باشد.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/SiteQaleb/js/bootstrap.min.js"></script>
+    <script src="/SiteQaleb/js/owl.carousel.js"></script>
+    <script src="/SiteQaleb/js/script.js"></script>
+    <script src="~/js/sitee.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Script", false)
+</body>
+</html>
+
+
+@* version bootstrap chon qadimie bayad code modal ham qadimi bashe ke baraye bastan modal ham codash farq dare havaset bashe *@
+<!-- Modal -->
+<div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="mymodallable">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="mymodallable">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bodymodal">
+                <!-- محتوای مودال -->
+            </div>
+            @* <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary">ذخیره تغییرات</button>
+            </div> *@
+        </div>
+    </div>
+</div>

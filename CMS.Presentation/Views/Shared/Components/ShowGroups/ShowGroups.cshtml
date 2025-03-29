@@ -1,0 +1,14 @@
+﻿@using CMS.Domain.ViewModels.Components
+@model IList<ShowGroupsViewModel>
+
+<section class="category-section border-radius">
+    <header><i class="fa fa-folder-open-o"></i> <h3> دسته بندی ها </h3></header>
+    <ul>
+        @foreach (var item in Model)
+        {
+            @* <li><a href="/Group/@item.GroupId/@item.GroupTitle">@item.GroupTitle<span>@item.PageCount</span></a></li> *@
+            <li><a role="button" onclick="ShowNewsByGroup(@item.GroupId,'@(Uri.EscapeDataString(item.GroupTitle))')">@item.GroupTitle<span>@item.PageCount</span></a></li>
+            @* <li><a asp-controller="Home" asp-action="ShowNewsById" asp-route-id="@item.GroupId" asp-route-title="@item.GroupTitle">@item.GroupTitle<span>@item.PageCount</span></a></li> *@
+        }
+    </ul>
+</section>

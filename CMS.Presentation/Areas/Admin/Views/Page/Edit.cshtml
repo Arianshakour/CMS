@@ -1,0 +1,63 @@
+﻿@using CMS.Domain.Dtoes.Page
+@model EditPageDto
+
+
+<div class="row">
+    <div class="col-md-4;input-group">
+        <form method="post" style="text-align:center" enctype="multipart/form-data" id="editPage">
+            <h2>ویرایش دسته بندی</h2>
+            <input type="hidden" asp-for="PageId" />
+            @*baraye ax hatman enctype="multipart/form-data" bezar*@
+            @*in khat ziro hatman bezar ke be khata nakhorim*@
+            <input type="hidden" asp-for="@Model.ImageName" />
+            <div class="input-group2">
+                <label asp-for="@Model.Title" class="control-label"></label>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.PageGroupId" class="control-label"></label>
+                <select asp-for="@Model.PageGroupId" class="form-control" asp-items="ViewBag.GroupId">
+                </select>
+                <span asp-validation-for="@Model.PageGroupId" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.ShortDescription" class="control-label"></label>
+                <input asp-for="@Model.ShortDescription" class="form-control" />
+                <span asp-validation-for="@Model.ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.ShowInSlider" class="control-label"></label>
+                <input asp-for="@Model.ShowInSlider" type="checkbox" />
+                <span asp-validation-for="@Model.ShowInSlider" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.ImageName" class="control-label"></label>
+                @if (Model.ImageName != null)
+                {
+                    <img src="/PageImages/@Model.ImageName" class="thumbnail" style="max-width: 150px" />
+                }
+            </div>
+            <div class="input-group2">
+                <label for="imgUp" class="control-label">تصویر جدید (اختیاری)</label>
+                <input type="file" asp-for="imgUp" class="form-control" />
+                <span asp-validation-for="imgUp" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.Text" class="control-label"></label>
+                <input asp-for="@Model.Text" class="form-control" />
+                <span asp-validation-for="@Model.Text" class="text-danger"></span>
+            </div>
+            <div class="input-group2">
+                <label asp-for="@Model.Tags" class="control-label"></label>
+                <input asp-for="@Model.Tags" class="form-control" placeholder="با - جدا کنید"/>
+                <span asp-validation-for="@Model.Tags" class="text-danger"></span>
+            </div>
+            <div class="input-group2 align-items-center" style="margin-top:8px">
+                @* <button type="submit" class="btn btn-success" asp-controller="Page" asp-action="Edit" style="width:450px;margin-top:8px">ثبت</button> *@
+                <button type="button" class="btn btn-success" onclick="EditPage()" style="width:450px;margin-top:8px">ثبت</button>
+                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#mymodal" style="width:450px;">بازگشت</a>
+            </div>
+        </form>
+    </div>
+</div>

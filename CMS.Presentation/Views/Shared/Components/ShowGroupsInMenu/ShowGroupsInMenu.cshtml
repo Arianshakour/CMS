@@ -1,0 +1,12 @@
+﻿@using CMS.Domain.ViewModels.Components
+@model IList<ShowGroupsViewModel>
+
+@foreach(var item in Model)
+{
+    @* <li><a href="/Group/@item.GroupId/@item.GroupTitle">@item.GroupTitle</a></li> *@
+    <li>
+        @* <a asp-controller="Home" asp-action="ShowNewsById" asp-route-id="@item.GroupId" asp-route-title="@item.GroupTitle">@item.GroupTitle</a> *@
+        <a role="button" onclick="ShowNewsByGroup(@item.GroupId,'@(Uri.EscapeDataString(item.GroupTitle))')">@item.GroupTitle</a>
+    </li>
+
+}

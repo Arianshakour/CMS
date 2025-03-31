@@ -28,9 +28,10 @@ function ShowNewsByGroup(gid, gti) {
     //ye moqe didi khata dare mitooni bjaye gti az decodedTitle estefade koni
     //hatman yadet bashe vaqti parameter az jense string mikhai bdi be method to ajax
     //hatman injoori bezar onclick="koft(@item.GroupId,'@(Uri.EscapeDataString(item.GroupTitle))')"
-    var URL = "/Group/" + gid + "/" + gti;
+    //var URL = "/Group/" + gid + "/" + gti;
+    var URL = "/Home/ShowNewsById/" + gid + "/" + gti;
     $.ajax({
-        url: "/Group/" + gid + "/" + gti,
+        url: "/Home/ShowNewsById/?id=" + gid + "&title=" + gti,
         type: "GET",
         data: {}
     }).done(function (result) {

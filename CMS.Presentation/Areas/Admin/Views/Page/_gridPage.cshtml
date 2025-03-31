@@ -38,7 +38,8 @@
                                 <a role="button" class="btn-icon fa-lg" onclick="openDetailsPage(@item.PageId)" title="مشاهده جزئیات"><i class='fas fa-info-circle fa-lg'></i></a>
                                 <a role="button" class="btn-icon fa-lg" onclick="openEditPage(@item.PageId)" title="ویرایش"><i class='fas fa-edit'></i></a>
                                 <a role="button" class="btn-icon fa-lg" onclick="openDeletePage(@item.PageId)" title="حذف"><i class='fas fa-trash'></i></a>
-                                <a type="button" class="btn btn-secondary" asp-controller="PageComment" asp-action="Index" asp-route-pageid="@item.PageId">رفتن به نظرات</a>
+                               @*<a type="button" class="btn btn-secondary" asp-controller="PageComment" asp-action="Index" asp-route-pageid="@item.PageId">رفتن به نظرات</a>*@
+                                <a type="button" class="btn btn-secondary" onclick="openCommentPage(@item.PageId)">رفتن به نظرات</a>
                             </td>
                         </tr>
                     }

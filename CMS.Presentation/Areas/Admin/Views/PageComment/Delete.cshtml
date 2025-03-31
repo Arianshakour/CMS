@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-4;input-group" style="font-family : yekan">
-        <form method="post" style="text-align:center">
+        <form method="post" style="text-align:center" id="deletePageComment">
             <h2>آیا از حذف اطمینان دارید ؟</h2>
             <input type="hidden" asp-for="CommentId" />
             <input type="hidden" asp-for="PageId" />
@@ -38,8 +38,10 @@
                 <input asp-for="@Model.GroupName" class="form-control" readonly />
             </div>
             <div class="input-group2 align-items-center" style="margin-top:8px">
-                <button type="submit" class="btn btn-success" asp-controller="PageComment" asp-action="Delete" style="width:450px;margin-top:8px">حذف</button>
-                <a type="button" class="btn btn-secondary" asp-controller="PageComment" asp-action="Index" asp-route-pageid="@Model.PageId" style="width:450px;">بازگشت</a>
+                @* <button type="submit" class="btn btn-success" asp-controller="PageComment" asp-action="Delete" style="width:450px;margin-top:8px">حذف</button> *@
+                <button type="button" class="btn btn-success" onclick="DeletePageComment()" style="width:450px;margin-top:8px">حذف</button>
+                @* <a type="button" class="btn btn-secondary" asp-controller="PageComment" asp-action="Index" asp-route-pageid="@Model.PageId" style="width:450px;">بازگشت</a> *@
+                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#mymodal" style="width:450px;">بازگشت</a>
             </div>
         </form>
     </div>

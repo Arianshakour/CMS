@@ -1,5 +1,6 @@
 ﻿using CMS.Application.Services.Implementations;
 using CMS.Application.Services.Interfaces;
+using CMS.Domain.Common;
 using CMS.Domain.Dtoes.PageComment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,10 @@ namespace CMS.Presentation.Areas.Admin.Controllers
         {
             ViewBag.TitleName = new SelectList(_pageService.GetPages().pageList, "PageId", "Title", pageid);
             var model = _pageCommentService.GetPageCommentsByPageId(pageid);
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_gridPageComment", model);
+            }
             return View(model);
         }
         public IActionResult Details(int id)
@@ -32,7 +37,7 @@ namespace CMS.Presentation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(model);
+            return PartialView(model);
         }
         public IActionResult Edit(int id)
         {
@@ -41,14 +46,16 @@ namespace CMS.Presentation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(model);
+            return PartialView(model);
         }
         [HttpPost]
         public IActionResult Edit(EditPageCommentDto edit)
         {
             if (!ModelState.IsValid)
             {
-                return View(edit);
+                //return View(edit);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Areas/Admin/Views/PageComment/Edit.cshtml", edit);
+                return Json(new { view = v1, success = false });
             }
             _pageCommentService.Update(edit);
             return RedirectToAction("Index",new { pageid = edit.PageId });
@@ -60,15 +67,11 @@ namespace CMS.Presentation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(model);
+            return PartialView(model);
         }
         [HttpPost]
         public IActionResult Delete(DeletePageCommentDto delete)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(delete);
-            }
             _pageCommentService.Delete(delete);
             return RedirectToAction("Index", new { pageid = delete.PageId });
         }

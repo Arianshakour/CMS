@@ -51,7 +51,7 @@
                         </ul>
                     </aside>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10" id="renderbody">
                     @RenderBody()
                 </div>
             </div>
@@ -71,6 +71,7 @@
     <script src="~/js/select2.min.js"></script>
     <script src="~/js/admin/pagegroup.js"></script>
     <script src="~/js/admin/page.js"></script>
+    <script src="~/js/admin/PageComment.js"></script>
     @* <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> *@
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("Script", false)

@@ -53,7 +53,8 @@ public class HomeController : Controller
     }
     //moqe ajax vaqti tedad vorodi az 1 balatare hatman bayad route bdi ke beshnase
     //vagarna be khata mikhore o nemishnase makhsosan az jense int nabashe
-    [Route("Group/{id}/{title}")]
+    //[Route("Group/{id}/{title}")]
+    //bdoone route ham ok kardam faqat bayad daqiq url ra moshakhas koni
     public IActionResult ShowNewsById(int id,string title)
     {
         ViewBag.Name = title;

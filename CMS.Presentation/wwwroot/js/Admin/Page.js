@@ -7,6 +7,20 @@
     }).done(function (result) {
         $('#gridPage').empty();
         $('#gridPage').html(result);
+        $('#gridPageComment').empty();
+        $('#gridPageComment').hide();
+    });
+}
+function openCommentPage(id) {
+    $.ajax({
+        url: "/Admin/PageComment/Index/?pageId=" + id,
+        type: "GET",
+        data: {}
+    }).done(function (result) {
+        $('#gridPage').empty();
+        $('#gridPageComment').empty();
+        $('#gridPageComment').html(result);
+        $('#gridPageComment').show();
     });
 }
 function openCreatePage() {

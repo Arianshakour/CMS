@@ -39,13 +39,13 @@
                 <div class="col-md-2">
                     <aside>
                         <ul class="list-group">
-                            <li class="list-group-item">
+                            <li class="list-group-item @(ViewContext.RouteData.Values["controller"].ToString() == "Page" ? "active" : "")">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Page" asp-action="Index">خبرها</a>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item @(ViewContext.RouteData.Values["controller"].ToString() == "PageGroup" ? "active" : "")">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="PageGroup" asp-action="Index">دسته‌بندی‌ها</a>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item @(ViewContext.RouteData.Values["controller"].ToString() == "PageComment" ? "active" : "")">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="PageComment" asp-action="Index">نظرات</a>
                             </li>
                         </ul>

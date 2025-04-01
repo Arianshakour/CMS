@@ -1,16 +1,16 @@
 ﻿@using CMS.Domain.Dtoes.PageGroup
 @model CreatePageGroupDto
 
-<div class="row">
-    <div class="col-md-4;input-group">
+<div class="row justify-content-center">
+    <div class="col-md-8;">
         <form method="post" style="text-align:center" id="addPageGroup">
-            <h2>افزودن دسته بندی</h2>
-            <div class="input-group2">
+            <h3>افزودن دسته بندی</h3>
+            <div class="mb-3">
                 <label asp-for="@Model.GroupTitle" class="control-label"></label>
                 <input asp-for="@Model.GroupTitle" class="form-control" />
                 <span asp-validation-for="@Model.GroupTitle" class="text-danger"></span>
             </div>
-            <div class="input-group2 align-items-center" style="margin-top:8px">
+            <div class="d-flex justify-content-around gap-3">
                 <button type="button" class="btn btn-success" onclick="CreatePageGroup()" style="width:450px;">ثبت</button>
                 @* <button type="submit" class="btn btn-success" asp-controller="PageGroup" asp-action="Create" style="width:450px;margin-top:8px">ثبت</button> *@
                 <a type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#mymodal" style="width:450px;">بازگشت</a>

@@ -33,3 +33,14 @@ body {
     left: 5px; /* قرار دادن در سمت چپ */
     margin: 1rem; /* کمی فاصله از لبه */
 }
+.list-group-item.active {
+    background-color: #12cf77; /* رنگ سبز */
+    color: white; /* متن سفید برای خوانایی بهتر */
+}
+.btn-icon i {
+    color: #12cf77; /* رنگ آیکون سبز */
+}
+
+    .btn-icon i:hover {
+        color: darkgreen; /* رنگ آیکون هنگام هاور */
+    }

@@ -18,57 +18,79 @@ namespace CMS.Presentation.Controllers
         }
         public IActionResult Register()
         {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("Register");
+            }
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
-            return PartialView();
+            return View();
         }
         [HttpPost]
         public IActionResult Register(RegisterDto register)
         {
             if (!ModelState.IsValid)
             {
-                return View(register);
+                //return View(register);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Register.cshtml", register);
+                return Json(new { view = v1, success = false});
             }
             if (_loginService.IsExistEmail(register.Email))
             {
                 ModelState.AddModelError("Email", "ایمیل معتبر نیست");
-                return View(register);
+                //return View(register);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Register.cshtml", register);
+                return Json(new { view = v1, success = false});
             }
             if (_loginService.IsExistUser(register.UserName))
             {
                 ModelState.AddModelError("UserName", "نام کاربری معتبر نیست");
-                return View(register);
+                //return View(register);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Register.cshtml", register);
+                return Json(new { view = v1, success = false });
             }
             _loginService.AddUser(register);
-            return View("SuccessRegister", register);
+            string v2 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/SuccessRegister.cshtml", register);
+            return Json(new { view = v2, success = true });
+            //return View("SuccessRegister", register);
         }
         public IActionResult Login()
         {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("Login");
+            }
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
-            return PartialView();
+            return View();
         }
         [HttpPost]
         public IActionResult Login(LoginDto login)
         {
             if (!ModelState.IsValid)
             {
-                return View(login);
+                //return View(login);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Login.cshtml", login);
+                return Json(new { view = v1, success = false });
             }
             var user = _loginService.GetMember(login);
             if (user == null)
             {
                 ModelState.AddModelError("Email", "کاربری با مشخصات یافت شده پیدا نشد");
-                return View(login);
+                //return View(login);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Login.cshtml", login);
+                return Json(new { view = v1, success = false });
             }
             if (user.IsActive == false)
             {
                 ModelState.AddModelError("Email", "حسابت فعال نیست");
-                return View(login);
+                //return View(login);
+                string v1 = ViewRendererUtils.RenderRazorViewToString(this, "~/Views/Login/Login.cshtml", login);
+                return Json(new { view = v1, success = false });
             }
             var claims = new List<Claim>()
                     {
@@ -84,7 +106,8 @@ namespace CMS.Presentation.Controllers
             };
             HttpContext.SignInAsync(principal, properties);
             ViewBag.IsSuccess = true;
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            //return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return Json(new { success = true });
         }
         [HttpGet]
         public IActionResult LoadLogout()

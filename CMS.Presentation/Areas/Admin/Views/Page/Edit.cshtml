@@ -35,17 +35,19 @@
                     <span asp-validation-for="@Model.ShowInSlider" class="text-danger"></span>
                 </div>
             </div>
-            <div class="input-group2">
-                <label asp-for="@Model.ImageName" class="control-label"></label>
-                @if (Model.ImageName != null)
-                {
-                    <img src="/PageImages/@Model.ImageName" class="thumbnail" style="max-width: 150px" />
-                }
-            </div>
-            <div class="input-group2">
-                <label for="imgUp" class="control-label">تصویر جدید (اختیاری)</label>
-                <input type="file" asp-for="imgUp" class="form-control" />
-                <span asp-validation-for="imgUp" class="text-danger"></span>
+            <div class="d-flex align-items-center justify-content-between mb-3 mt-3 gap-1">
+                <div class="w-50 d-flex align-items-center">
+                    <label asp-for="@Model.ImageName" class="control-label"></label>
+                    @if (Model.ImageName != null)
+                    {
+                        <img src="/PageImages/@Model.ImageName" class="thumbnail" style="max-width: 150px" />
+                    }
+                </div>
+                <div class="w-50">
+                    <label for="imgUp" class="control-label">تصویر جدید (اختیاری)</label>
+                    <input type="file" asp-for="imgUp" class="form-control" />
+                    <span asp-validation-for="imgUp" class="text-danger"></span>
+                </div>
             </div>
             <div class="input-group2">
                 <label asp-for="@Model.Text" class="control-label"></label>

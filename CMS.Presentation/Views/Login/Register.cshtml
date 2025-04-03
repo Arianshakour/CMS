@@ -1,12 +1,17 @@
 ﻿@using CMS.Domain.Dtoes.Member
 @model RegisterDto
 
+@section script {
+    <script src="~/js/sitee.js"></script>
+}
+
+
 @{
     ViewData["Title"] = "ثبت نام";
 }
 
 
-<div class="register-container" id="registercontainer">
+<div class="register-container">
     <header><h3> ثبت نام در سایت </h3></header>
     <br />
     <div>
@@ -28,13 +33,14 @@
                 <span asp-validation-for="RePassword" class="text-danger"></span>
             </div>
             <div>
-                @* <button type="button" onclick="registerUserPost()" class="btn-register"> ثبت نام </button> *@
-                <button type="submit" asp-action="Register" asp-controller="Login" class="btn btn-success"> ثبت نام </button>
+                @* <button type="submit" asp-action="Register" asp-controller="Login" class="btn btn-success"> ثبت نام </button> *@
+                <button type="button" class="btn btn-success" onclick="RegisterPost()"> ثبت نام </button>
             </div>
         </form>
         <div class="footer">
             @* <p>حساب کاربری دارید؟ <a type="button" onclick="loadLoginPage()">وارد شوید</a></p> *@
-            <p>حساب کاربری دارید؟ <a type="button" class="btn btn-primary" asp-action="Login" asp-controller="Login">وارد شوید</a></p>
+            @* <p>حساب کاربری دارید؟ <a type="button" class="btn btn-primary" asp-action="Login" asp-controller="Login">وارد شوید</a></p> *@
+            <p>حساب کاربری دارید؟ <a type="button" class="btn btn-primary" onclick="LoginBtn()">وارد شوید</a></p>
         </div>
     </div>
 </div>

@@ -119,6 +119,22 @@ function LoginBtn() {
         history.replaceState(null, null, URL);
     });
 }
+function LoginPost() {
+    var input = $("#loginForm").serialize();
+    $.ajax({
+        url: "/Login/Login/",
+        type: "Post",
+        data: input,
+    }).done(function (result) {
+        if (!result.success) {
+            $('#safe').empty();
+            $('#safe').html(result.view);
+        }
+        else {
+            window.location.href = '/Admin/Home/Index';
+        }
+    });
+}
 
 function RegisterBtn() {
     var URL = "/Login/Register/";
@@ -130,5 +146,22 @@ function RegisterBtn() {
         $('#safe').empty();
         $('#safe').html(result);
         history.replaceState(null, null, URL);
+    });
+}
+function RegisterPost() {
+    var input = $("#registerForm").serialize();
+    $.ajax({
+        url: "/Login/Register/",
+        type: "Post",
+        data: input,
+    }).done(function (result) {
+        if (result.success) {
+            $('#safe').empty();
+            $('#safe').html(result.view);
+        }
+        else {
+            $('#safe').empty();
+            $('#safe').html(result.view);
+        }
     });
 }

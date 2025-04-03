@@ -49,7 +49,11 @@ public class HomeController : Controller
     public IActionResult Archive()
     {
         var model = _pageService.GetPages();
-        return PartialView(model);
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            return PartialView("Archive", model);
+        }
+        return View(model);
     }
     //moqe ajax vaqti tedad vorodi az 1 balatare hatman bayad route bdi ke beshnase
     //vagarna be khata mikhore o nemishnase makhsosan az jense int nabashe
@@ -59,7 +63,11 @@ public class HomeController : Controller
     {
         ViewBag.Name = title;
         var model = _pageService.GetPagesById(id);
-        return PartialView(model);
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            return PartialView("ShowNewsById", model);
+        }
+        return View(model);
     }
     public IActionResult ShowNews(int id)
     {
@@ -68,7 +76,11 @@ public class HomeController : Controller
         {
             return NotFound();
         }
-        return PartialView(model);
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            return PartialView("ShowNews", model);
+        }
+        return View(model);
     }
     [HttpPost]
     public IActionResult AddComment(int pageId, string name, string email, string comment)

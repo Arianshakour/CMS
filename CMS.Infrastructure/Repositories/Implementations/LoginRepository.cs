@@ -24,7 +24,7 @@ namespace CMS.Infrastructure.Repositories.Implementations
 
         public Member? GetMember(string email, string pass)
         {
-            var member = _context.Members.First(x => x.Email == email && x.Password == pass);
+            var member = _context.Members.FirstOrDefault(x => x.Email == email && x.Password == pass);
             return member;
         }
 
